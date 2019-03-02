@@ -3,6 +3,8 @@ import { FormGroup,FormBuilder,Validator, Validators } from '@angular/forms'
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-reactiveform',
@@ -14,7 +16,8 @@ export class LoginReactiveformComponent implements OnInit {
   myForm:FormGroup;
   errorMsg:boolean;
 
-  constructor(private fb:FormBuilder,private firebase:AngularFireAuth,private router:Router) { }
+  constructor(private fb:FormBuilder,private firebase:AngularFireAuth,private router:Router,
+    private authService:AuthService) { }
 
   ngOnInit() {
 
@@ -50,18 +53,26 @@ export class LoginReactiveformComponent implements OnInit {
     var email=this.myForm.value.email;
     var password=this.myForm.value.password;
 
-      this.firebase.auth.signInWithEmailAndPassword(email,password)
-                        .then((success)=>{
+    console.log("called login");
 
-                          console.log(success);
-                           this.router.navigate(['/dashboard']);
+    var islogin=this.authService.login(email,password);
 
-                        }).catch(function(error){
+      delay(1000);
 
-                          console.log("failed");
-                          console.log(error);
-                        }) 
+      islogin=true;
 
-  }
+      console.log("islogin=",islogin)
+      
+      if(islogin){
+
+          console.log("helloworld")
+          this.router.navigate(["/dashboard"]);
+      }else{
+
+        console.log("faild login");
+      }
+
+
+   }
 
 }

@@ -10,13 +10,18 @@ import { LoginReactiveformComponent } from './login-reactiveform/login-reactivef
 import { environment } from 'src/environments/environment'
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { NoPageComponent } from './no-page/no-page.component';
+import { FindVehicleComponent } from './find-vehicle/find-vehicle.component';
+import { DashboardRoutingModule } from './dashboard/dashboard-routing.module'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginReactiveformComponent,
-    DashboardComponent
+    DashboardComponent,
+    NoPageComponent,
+    FindVehicleComponent
+
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     AngularFireModule.initializeApp(environment.FirebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    DashboardRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
