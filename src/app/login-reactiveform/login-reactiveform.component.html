@@ -1,0 +1,40 @@
+<div id="loginForm">
+
+  <h1 class="display-4" style="text-align: center">Login</h1>
+
+    <form class="controller" [formGroup]="myForm">
+  
+        <div>
+          <label>Email</label> 
+          <input  name="email" type="email" class="form-control" placeholder="email"  formControlName="email"  >
+
+          <div *ngIf="!myForm.controls.email.valid && myForm.controls.email.touched">
+              <p *ngIf="myForm.controls.email.errors?.required">Email is required.</p>
+              <p *ngIf="myForm.controls.email.errors?.email">Email is incorrect.</p>
+          </div>
+
+        </div>
+  
+       <div>
+         
+          <label>Password</label>
+          <input type="password" name="password"  formControlName="password" class="form-control" minlength="6" placeholder="password">
+
+          <div *ngIf="!myForm.controls.password.valid && myForm.controls.password.touched">
+
+            <p *ngIf="myForm.controls.email.errors?.required">password is required.</p>
+            <p *ngIf="myForm.controls.email.errors?.minlength">password is incorrect.</p>
+
+        </div>
+
+      </div>
+            
+       <div>
+  
+          <button type="submit" [disabled]="myForm.invalid" (click)="login(myForm)">Submit</button>
+        
+       </div>
+  
+  </form>
+  
+  </div>
